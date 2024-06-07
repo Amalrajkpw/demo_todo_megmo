@@ -10,7 +10,7 @@ class AppThemeFactory {
     // scaffoldBackgroundColor: Colors.white,
     textTheme: AppTextTheme.lightTextTheme,
     elevatedButtonTheme: AppElevatedButtonTheme.lightEleavatedButton,
-    inputDecorationTheme: AppInputTheme.lightInputDecorationTheme,
+
 
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.blue,
@@ -45,25 +45,8 @@ class AppElevatedButtonTheme {
 // elevated button for dark theme
 }
 
-// Customized theme for input field
 
-class AppInputTheme {
-  AppInputTheme._();
 
-  static final lightInputDecorationTheme = InputDecorationTheme(
-    filled: true,
-    fillColor: Colors.transparent,
-    hintStyle: TextStyle(color: AppColors.subTextColor, fontSize: 14.sp),
-    prefixIconColor: Colors.black,
-    suffixIconColor: Colors.black,
-    labelStyle: const TextStyle(color: Colors.black),
-    // Set border styles
-    border: InputBorder.none,
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.transparent),
-    ),
-  );
-}
 
 // Customized Theme data for fonts
 
@@ -72,9 +55,9 @@ class AppTextTheme {
 
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: TextStyle(
-        fontSize: 34.sp,
+        fontSize: 20.sp,
         fontWeight: FontWeight.w600,
-        color: AppColors.appBlack),
+        color: Colors.white),
     headlineMedium: TextStyle(
         fontSize: 27.sp,
         fontWeight: FontWeight.w600,
@@ -91,5 +74,6 @@ class AppTextTheme {
         fontSize: 14.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.textBlue),
+
   );
 }
