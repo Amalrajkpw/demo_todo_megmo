@@ -2,14 +2,18 @@ import 'dart:ffi';
 
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
-import 'package:demo_todo_megmo/view/controller/home_screen_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/home_screen_controller.dart';
+
 class AddTaskBottomSheet extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final homeController = Get.put(HomeScreenController());
+
+  AddTaskBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +43,11 @@ class AddTaskBottomSheet extends StatelessWidget {
                 AppSizedBox.sizedBox20vertical,
                 TextFormField(
                   controller: homeController.titleController.value,
+                  style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: 'Add ToDo',
-                    hintStyle:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    // hintStyle:
+                    //     TextStyle(color: Theme.of(context).colorScheme.primary),
                     labelStyle:
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                     border: const OutlineInputBorder(),
@@ -57,10 +62,9 @@ class AddTaskBottomSheet extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: homeController.descriptionController.value,
+                  style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: 'Description',
-                    hintStyle:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
                     labelStyle:
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                     border: const OutlineInputBorder(),
@@ -68,12 +72,12 @@ class AddTaskBottomSheet extends StatelessWidget {
                   maxLines: 3,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
+                      return 'Please enter a description';
                     }
                     return null;
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 SizedBox(
                   width: double.infinity,
                   height: 47.h,

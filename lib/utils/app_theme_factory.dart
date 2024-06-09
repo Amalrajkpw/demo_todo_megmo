@@ -57,7 +57,7 @@ class AppTextTheme {
     headlineLarge: TextStyle(
         fontSize: 20.sp,
         fontWeight: FontWeight.w600,
-        color: Colors.white),
+        color: Colors.black),
     headlineMedium: TextStyle(
         fontSize: 27.sp,
         fontWeight: FontWeight.w600,

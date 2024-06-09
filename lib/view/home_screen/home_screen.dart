@@ -1,6 +1,6 @@
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
-import 'package:demo_todo_megmo/view/controller/home_screen_controller.dart';
+
 import 'package:demo_todo_megmo/view/home_screen/widgets/add_todo_bottomsheet.dart';
 import 'package:demo_todo_megmo/view/home_screen/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,13 @@ class HomeScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Todo'),
+          title: Text(
+            'ToDo',
+            style: TextStyle(
+                fontSize: 20.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
@@ -35,7 +41,6 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-
                 TabBar(
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicatorWeight: 5.h,
@@ -45,17 +50,25 @@ class HomeScreen extends StatelessWidget {
                     Tab(text: 'Completed'),
                   ],
                 ),
-                  AppSizedBox.sizedBox20vertical,
-                  Expanded(
+                AppSizedBox.sizedBox20vertical,
+                Expanded(
                   child: TabBarView(children: [
                     ListView.separated(
-                      separatorBuilder:(context,int)=>AppSizedBox.sizedBox20vertical,
-                      itemCount: 10,
-                      itemBuilder: (context,index)=>TodoTileWidget(title: int,description: int,)),
-                    ListView.separated(
-                        separatorBuilder:(context,int)=>AppSizedBox.sizedBox20vertical,
+                        separatorBuilder: (context, int) =>
+                            AppSizedBox.sizedBox20vertical,
                         itemCount: 10,
-                        itemBuilder: (context,index)=>TodoTileWidget(title: int,description: int,)),
+                        itemBuilder: (context, index) => TodoTileWidget(
+                              title: int,
+                              description: int,
+                            )),
+                    ListView.separated(
+                        separatorBuilder: (context, int) =>
+                            AppSizedBox.sizedBox20vertical,
+                        itemCount: 10,
+                        itemBuilder: (context, index) => TodoTileWidget(
+                              title: int,
+                              description: int,
+                            )),
                   ]),
                 )
               ],
@@ -64,11 +77,11 @@ class HomeScreen extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
           backgroundColor: Theme.of(context).colorScheme.primary,
           onPressed: () {
             showModalBottomSheet(
-
               context: context,
               isScrollControlled: true,
               builder: (BuildContext context) {
@@ -78,7 +91,10 @@ class HomeScreen extends StatelessWidget {
           },
           label: Row(
             children: [
-             const  Icon(Icons.add,color: Colors.white,),
+              const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
               AppSizedBox.sizedBox10horizontal,
               Text(
                 'Add ToDo',
@@ -91,7 +107,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-
       ),
     );
   }

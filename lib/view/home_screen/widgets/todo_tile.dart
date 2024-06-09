@@ -1,9 +1,10 @@
 import 'package:demo_todo_megmo/utils/routes.dart';
-import 'package:demo_todo_megmo/view/controller/home_screen_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/home_screen_controller.dart';
 import '../../../utils/app_padding.dart';
 import '../../../utils/app_sizedbox.dart';
 import '../../todo_deails_screen/todo_details_screen.dart';
@@ -44,7 +45,7 @@ class TodoTileWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Title',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       AppSizedBox.sizedBox10vertical,
                       SizedBox(
