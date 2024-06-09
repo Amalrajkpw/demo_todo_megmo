@@ -1,5 +1,8 @@
+import 'dart:developer';
 import 'dart:ffi';
 
+import 'package:demo_todo_megmo/model/todo_model.dart';
+import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
 
@@ -31,7 +34,10 @@ class AddTaskBottomSheet extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+          bottom: MediaQuery
+              .of(context)
+              .viewInsets
+              .bottom,
         ),
         child: Padding(
           padding: AppPadding.padding14,
@@ -49,7 +55,10 @@ class AddTaskBottomSheet extends StatelessWidget {
                     // hintStyle:
                     //     TextStyle(color: Theme.of(context).colorScheme.primary),
                     labelStyle:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    TextStyle(color: Theme
+                        .of(context)
+                        .colorScheme
+                        .primary),
                     border: const OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -66,9 +75,13 @@ class AddTaskBottomSheet extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Description',
                     labelStyle:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    TextStyle(color: Theme
+                        .of(context)
+                        .colorScheme
+                        .primary),
                     border: const OutlineInputBorder(),
                   ),
+                  keyboardType: TextInputType.multiline,
                   maxLines: 3,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -82,9 +95,14 @@ class AddTaskBottomSheet extends StatelessWidget {
                   width: double.infinity,
                   height: 47.h,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async{
                       if (_formKey.currentState?.validate() ?? false) {
+                        TodoModel todoModel = TodoModel(title: homeController
+                            .titleController.value.text,
+                            description: homeController.descriptionController.value.text);
                         Get.back();
+                         AppServices.postData(todoModel);
+
                       }
                     },
                     child: const Text('Save'),

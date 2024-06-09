@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../model/todo_model.dart';
+
 class HomeScreenController extends GetxController{
   RxBool isChecked = false.obs;
 
@@ -10,4 +12,6 @@ class HomeScreenController extends GetxController{
 
   final titleController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
+
+  var allTodoList = <TodoGetModel>[].obs;
 }
