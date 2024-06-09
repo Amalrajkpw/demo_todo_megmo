@@ -23,7 +23,7 @@ class TodoAppMegmo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Todo Megmo',
       theme: AppThemeFactory.lightTheme,
-      initialRoute: Routes.splashScreenRoute,
+      initialRoute: Routes.homeScreenRoute,
       getPages: Routes.pages,
     );
   }
