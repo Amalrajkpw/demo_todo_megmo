@@ -16,16 +16,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState()  {
+  void initState() {
     super.initState();
-     AppServices.getData();
-     homeController.refreshAllTodo();
-    print('alltodo');
-    print(homeController.allTodoList.toString());
-    homeController.isCompletedList.assignAll(
-        homeController.allTodoList.where((todo) => todo.isCompleted).toList());
+    AppServices.getData();
+
+    homeController.refreshAllTodo();
 
     Future.delayed(const Duration(seconds: 2), () {
+      homeController.isCompletedList.assignAll(homeController.allTodoList
+          .where((todo) => todo.isCompleted)
+          .toList());
+      homeController.refreshCompletedTodo();
+      print('comTodo');
+      print(homeController.isCompletedList.length);
+      homeController.refreshAllTodo();
+      print('alltodo');
+      print(homeController.allTodoList.toString());
       Get.offNamed(Routes.homeScreenRoute);
     });
   }

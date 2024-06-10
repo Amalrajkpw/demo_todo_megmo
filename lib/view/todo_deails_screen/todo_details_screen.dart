@@ -11,11 +11,11 @@ import 'package:get/get.dart';
 class TodoDetailsPage extends StatelessWidget {
   final String? title;
   final String? description;
-  final bool? isCompleted;
+  final bool isCompleted;
   final dynamic id;
 
   const TodoDetailsPage(
-      {Key? key, this.id, this.title, this.isCompleted, this.description})
+      {Key? key, this.id, this.title,required this.isCompleted, this.description})
       : super(key: key);
 
   @override
@@ -85,6 +85,7 @@ class TodoDetailsPage extends StatelessWidget {
                             id: id,
                             description: description,
                             string: title,
+                            isCompleted: isCompleted,
                           );
                         },
                       );

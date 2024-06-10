@@ -4,6 +4,7 @@ import 'package:demo_todo_megmo/model/todo_model.dart';
 import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
+import 'package:demo_todo_megmo/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,11 @@ class AddTaskBottomSheet extends StatelessWidget {
   final string;
   final description;
   final id;
+  final bool isCompleted;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final homeController = Get.put(HomeScreenController());
 
-  AddTaskBottomSheet({super.key, this.string, this.description, this.id});
+  AddTaskBottomSheet({super.key, this.string, this.description, this.id,this.isCompleted=false});
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +49,10 @@ class AddTaskBottomSheet extends StatelessWidget {
                 AppSizedBox.sizedBox20vertical,
                 TextFormField(
                   controller: homeController.titleController.value,
+                  // initialValue:id != null ?  string :"some",
                   style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    labelText: 'Add ToDo',
+                    labelText: id != null ? string : 'Add ToDo',
                     // hintStyle:
                     //     TextStyle(color: Theme.of(context).colorScheme.primary),
                     labelStyle:
@@ -66,9 +69,10 @@ class AddTaskBottomSheet extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: homeController.descriptionController.value,
+                  // initialValue: id != null ?  description :"some",
                   style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    labelText: 'Description',
+                    labelText: id != null ? description : 'Description',
                     labelStyle:
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                     border: const OutlineInputBorder(),
@@ -89,17 +93,39 @@ class AddTaskBottomSheet extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState?.validate() ?? false) {
-                        TodoModel todoModel = TodoModel(
+                        // Get.back();
+                        // log(homeController.isEdit.value.toString());
+                        if (id != null) {
+                          // Update task
+                          TodoModel todoModel = TodoModel(
                             title: homeController.titleController.value.text,
-                            description: homeController
-                                .descriptionController.value.text);
-                        Get.back();
-                        log(homeController.isEdit.value.toString());
+                            description:
+                                homeController.descriptionController.value.text,
+                            isCompleted: isCompleted,
+                          );
+                          AppServices.updateToDo(id, todoModel);
+                          AppServices.getData();
+                          homeController.refreshAllTodo();
+                          Get.offNamed(Routes.homeScreenRoute);
+                          homeController.titleController.value.clear();
+                          homeController.descriptionController.value.clear();
+                        } else {
+                          // Create task
+                          TodoModel todoModel = TodoModel(
+                            title: homeController.titleController.value.text,
+                            description:
+                                homeController.descriptionController.value.text,
+                          );
 
-                       await AppServices.postData(todoModel);
-                       await AppServices.getData();
-homeController.titleController.value.clear();
-homeController.descriptionController.value.clear();
+                          AppServices.postData(todoModel);
+                          AppServices.getData();
+                          homeController.refreshAllTodo();
+                          Get.back();
+                          homeController.titleController.value.clear();
+                          homeController.descriptionController.value.clear();
+                        }
+
+                        await AppServices.getData();
                       }
                     },
                     child: const Text('Save'),

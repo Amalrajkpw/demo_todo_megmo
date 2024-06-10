@@ -1,4 +1,3 @@
-
 import 'package:demo_todo_megmo/model/todo_model.dart';
 import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/routes.dart';
@@ -19,23 +18,23 @@ class TodoTileWidget extends StatelessWidget {
   final bool isCompleted;
   final dynamic id;
 
-  const TodoTileWidget({super.key,
-    required this.title,
-    required this.description,
-    required this.isCompleted,
-    required this.id});
+  const TodoTileWidget(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.isCompleted,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     final homeScreenController = Get.put(HomeScreenController());
     return InkWell(
-      onTap: () =>
-          Get.to(TodoDetailsPage(
-            id: id,
-            title: title,
-            description: description,
-            isCompleted: isCompleted,
-          )),
+      onTap: () => Get.to(TodoDetailsPage(
+        id: id,
+        title: title,
+        description: description,
+        isCompleted: isCompleted,
+      )),
       child: Padding(
         padding: AppPadding.padding14,
         child: Container(
@@ -45,17 +44,11 @@ class TodoTileWidget extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(
-                  color: Theme
-                      .of(context)
-                      .colorScheme
-                      .primary,
+                  color: Theme.of(context).colorScheme.primary,
                   width: 4,
                 ),
                 bottom: BorderSide(
-                  color: Theme
-                      .of(context)
-                      .colorScheme
-                      .primary,
+                  color: Theme.of(context).colorScheme.primary,
                   width: 1,
                 ),
               ),
@@ -69,20 +62,14 @@ class TodoTileWidget extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headlineLarge,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       AppSizedBox.sizedBox10vertical,
                       SizedBox(
                         width: 260.w,
                         child: Text(
                           description,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleMedium,
+                          style: Theme.of(context).textTheme.titleMedium,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -94,28 +81,41 @@ class TodoTileWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                   AppServices.UpdateToDo(id, TodoModel(title: title, description: description,isCompleted: true));
+                        bool newIsCompleted = !isCompleted;
+                        AppServices.updateToDo(
+                            id,
+                            TodoModel(
+                                title: title,
+                                description: description,
+                                isCompleted: newIsCompleted));
                         AppServices.getData();
+
+                        homeScreenController.update();
+                        homeController.isCompletedList.assignAll(homeController
+                            .allTodoList
+                            .where((todo) => todo.isCompleted)
+                            .toList());
+                        homeController.refreshCompletedTodo();
 
                       },
                       child: Container(
                         width: 24,
                         height: 24,
                         decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Theme.of(context).colorScheme.primary,
+                                width: 2),
                             shape: BoxShape.circle,
                             color: isCompleted
-                                ? Theme
-                                .of(context)
-                                .colorScheme
-                                .primary
+                                ? Theme.of(context).colorScheme.primary
                                 : Colors.white),
                         child: Center(
                           child: isCompleted
                               ? const Icon(
-                            Icons.check,
-                            size: 16,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 16,
+                                  color: Colors.white,
+                                )
                               : const SizedBox(),
                         ),
                       ),

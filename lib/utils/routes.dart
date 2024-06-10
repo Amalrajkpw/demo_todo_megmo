@@ -14,12 +14,12 @@ class Routes {
         ),
     GetPage(
       name: homeScreenRoute,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
     ),
     GetPage(
       name: todoDetailsRoute,
-      page: () =>  TodoDetailsPage(
-
+      page: () => const  TodoDetailsPage(
+isCompleted: true,
       ),
     ),
   ];

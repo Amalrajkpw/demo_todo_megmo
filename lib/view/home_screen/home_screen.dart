@@ -13,12 +13,10 @@ import 'dart:ui';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-
-   const  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -59,28 +57,62 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   child: TabBarView(children: [
                     Obx(
-                          ()  =>homeController.allTodoList.isEmpty?Center(child: Text('Get Started\nAdd a new ToDo'),) :ListView.separated(
-                          separatorBuilder: (context, int) =>
-                              AppSizedBox.sizedBox20vertical,
-                          itemCount: homeController.allTodoList.length,
-                          itemBuilder: (context, index) => TodoTileWidget(
-                                title: homeController.allTodoList.value[index].title,
-                                description: homeController.allTodoList.value[index].description,
-                            isCompleted: homeController.allTodoList.value[index].isCompleted,
-                            id: homeController.allTodoList.value[index].id,
-                              )),
+                      () => homeController.allTodoList.length == 0
+                          ? Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  'Get Started\nAdd a new ToDo',
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                ),
+                              ),
+                            )
+                          : ListView.separated(
+                              separatorBuilder: (context, int) =>
+                                  AppSizedBox.sizedBox20vertical,
+                              itemCount: homeController.allTodoList.length,
+                              itemBuilder: (context, index) => TodoTileWidget(
+                                    title: homeController
+                                        .allTodoList.value[index].title,
+                                    description: homeController
+                                        .allTodoList.value[index].description,
+                                    isCompleted: homeController
+                                        .allTodoList.value[index].isCompleted,
+                                    id: homeController
+                                        .allTodoList.value[index].id,
+                                  )),
                     ),
                     Obx(
-                        () =>ListView.separated(
-                          separatorBuilder: (context, int) =>
-                          AppSizedBox.sizedBox20vertical,
-                          itemCount: homeController.isCompletedList.length,
-                          itemBuilder: (context, index) => TodoTileWidget(
-                            title: homeController.isCompletedList.value[index].title,
-                            description: homeController.isCompletedList.value[index].description,
-                            isCompleted: homeController.isCompletedList.value[index].isCompleted,
-                            id: homeController.isCompletedList.value[index].id,
-                          )),
+                      () => homeController.isCompletedList.length == 0
+                          ? Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  '"Mission not yet accomplished!"',
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                ),
+                              ),
+                            )
+                          : ListView.separated(
+                              separatorBuilder: (context, int) =>
+                                  AppSizedBox.sizedBox20vertical,
+                              itemCount: homeController.isCompletedList.length,
+                              itemBuilder: (context, index) => TodoTileWidget(
+                                    title: homeController
+                                        .isCompletedList.value[index].title,
+                                    description: homeController.isCompletedList
+                                        .value[index].description,
+                                    isCompleted: homeController.isCompletedList
+                                        .value[index].isCompleted,
+                                    id: homeController
+                                        .isCompletedList.value[index].id,
+                                  )),
                     ),
                   ]),
                 )

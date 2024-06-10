@@ -4,9 +4,11 @@ class TodoModel {
   String description;
   bool isCompleted;
 
-  TodoModel({
-    required this.title, required this.description, this.isCompleted = false,this.id
-  });
+  TodoModel(
+      {required this.title,
+      required this.description,
+      this.isCompleted = false,
+      this.id});
 }
 
 class TodoGetModel {
@@ -15,13 +17,11 @@ class TodoGetModel {
   final String description;
   final bool isCompleted;
 
-
   TodoGetModel({
     required this.id,
     required this.title,
     required this.description,
     required this.isCompleted,
-
   });
 
   factory TodoGetModel.fromJson(Map<String, dynamic> json) {
@@ -30,7 +30,6 @@ class TodoGetModel {
       title: json['title'],
       description: json['description'],
       isCompleted: json['is_completed'],
-
     );
   }
 }

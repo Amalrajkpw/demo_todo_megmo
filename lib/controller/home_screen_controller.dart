@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../model/todo_model.dart';
+import '../services/services.dart';
 
 class HomeScreenController extends GetxController {
   RxBool isChecked = false.obs;
@@ -16,8 +17,16 @@ class HomeScreenController extends GetxController {
 
   var allTodoList = <TodoGetModel>[].obs;
   var isCompletedList = <TodoGetModel>[].obs;
-  void refreshAllTodo (){
+
+  void refreshAllTodo() {
     allTodoList.refresh();
-    update( );
+    update();
+  }
+
+
+
+  void refreshCompletedTodo() {
+    isCompletedList.refresh();
+    update();
   }
 }

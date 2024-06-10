@@ -134,7 +134,7 @@ class AppServices {
 
   // Update Method
 
-  static Future UpdateToDo(String id,TodoModel todoModel) async {
+  static Future updateToDo(String id,TodoModel todoModel) async {
 
     final uri = Uri.parse(updateUrl + id);
 
@@ -145,7 +145,7 @@ class AppServices {
         body: jsonEncode({
           "title": todoModel.title,
           "description": todoModel.description,
-          "is_completed": false
+          "is_completed": todoModel.isCompleted
         }),
       );
       if (response.statusCode == 200) {
@@ -153,11 +153,16 @@ class AppServices {
           "Updated",
           "Updated ToDo",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.green,
           colorText: Colors.white,
         );
         await getData();
         homeController.refreshAllTodo();
+        homeController.isCompletedList.assignAll(homeController
+            .allTodoList
+            .where((todo) => todo.isCompleted)
+            .toList());
+        homeController.refreshCompletedTodo();
         return true;
       } else {
         // Failed to delete todo
