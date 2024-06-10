@@ -113,6 +113,12 @@ class AppServices {
         );
         await getData();
         homeController.refreshAllTodo();
+        homeController.refreshAllTodo();
+        homeController.isCompletedList.assignAll(homeController
+            .allTodoList
+            .where((todo) => todo.isCompleted)
+            .toList());
+        homeController.refreshCompletedTodo();
         return true;
       } else {
         // Failed to delete todo
