@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../model/todo_model.dart';
 
-class HomeScreenController extends GetxController{
+class HomeScreenController extends GetxController {
   RxBool isChecked = false.obs;
 
   void toggle() {
@@ -12,6 +12,12 @@ class HomeScreenController extends GetxController{
 
   final titleController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
+  final RxBool isEdit = false.obs;
 
   var allTodoList = <TodoGetModel>[].obs;
+  var isCompletedList = <TodoGetModel>[].obs;
+  void refreshAllTodo (){
+    allTodoList.refresh();
+    update( );
+  }
 }

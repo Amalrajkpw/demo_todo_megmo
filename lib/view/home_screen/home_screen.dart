@@ -1,3 +1,5 @@
+import 'package:demo_todo_megmo/controller/home_screen_controller.dart';
+import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
 
@@ -5,15 +7,18 @@ import 'package:demo_todo_megmo/view/home_screen/widgets/add_todo_bottomsheet.da
 import 'package:demo_todo_megmo/view/home_screen/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'dart:ui';
 
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+
+   const  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -53,22 +58,30 @@ class HomeScreen extends StatelessWidget {
                 AppSizedBox.sizedBox20vertical,
                 Expanded(
                   child: TabBarView(children: [
-                    ListView.separated(
-                        separatorBuilder: (context, int) =>
-                            AppSizedBox.sizedBox20vertical,
-                        itemCount: 10,
-                        itemBuilder: (context, index) => TodoTileWidget(
-                              title: int,
-                              description: int,
-                            )),
-                    ListView.separated(
-                        separatorBuilder: (context, int) =>
-                            AppSizedBox.sizedBox20vertical,
-                        itemCount: 10,
-                        itemBuilder: (context, index) => TodoTileWidget(
-                              title: int,
-                              description: int,
-                            )),
+                    Obx(
+                          ()  =>homeController.allTodoList.isEmpty?Center(child: Text('Get Started\nAdd a new ToDo'),) :ListView.separated(
+                          separatorBuilder: (context, int) =>
+                              AppSizedBox.sizedBox20vertical,
+                          itemCount: homeController.allTodoList.length,
+                          itemBuilder: (context, index) => TodoTileWidget(
+                                title: homeController.allTodoList.value[index].title,
+                                description: homeController.allTodoList.value[index].description,
+                            isCompleted: homeController.allTodoList.value[index].isCompleted,
+                            id: homeController.allTodoList.value[index].id,
+                              )),
+                    ),
+                    Obx(
+                        () =>ListView.separated(
+                          separatorBuilder: (context, int) =>
+                          AppSizedBox.sizedBox20vertical,
+                          itemCount: homeController.isCompletedList.length,
+                          itemBuilder: (context, index) => TodoTileWidget(
+                            title: homeController.isCompletedList.value[index].title,
+                            description: homeController.isCompletedList.value[index].description,
+                            isCompleted: homeController.isCompletedList.value[index].isCompleted,
+                            id: homeController.isCompletedList.value[index].id,
+                          )),
+                    ),
                   ]),
                 )
               ],

@@ -1,11 +1,9 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:demo_todo_megmo/model/todo_model.dart';
 import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/app_padding.dart';
 import 'package:demo_todo_megmo/utils/app_sizedbox.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,10 +11,13 @@ import 'package:get/get.dart';
 import '../../../controller/home_screen_controller.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
+  final string;
+  final description;
+  final id;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final homeController = Get.put(HomeScreenController());
 
-  AddTaskBottomSheet({super.key});
+  AddTaskBottomSheet({super.key, this.string, this.description, this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +35,7 @@ class AddTaskBottomSheet extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery
-              .of(context)
-              .viewInsets
-              .bottom,
+          bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Padding(
           padding: AppPadding.padding14,
@@ -55,10 +53,7 @@ class AddTaskBottomSheet extends StatelessWidget {
                     // hintStyle:
                     //     TextStyle(color: Theme.of(context).colorScheme.primary),
                     labelStyle:
-                    TextStyle(color: Theme
-                        .of(context)
-                        .colorScheme
-                        .primary),
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                     border: const OutlineInputBorder(),
                   ),
                   validator: (value) {
@@ -75,10 +70,7 @@ class AddTaskBottomSheet extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Description',
                     labelStyle:
-                    TextStyle(color: Theme
-                        .of(context)
-                        .colorScheme
-                        .primary),
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                     border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.multiline,
@@ -95,14 +87,19 @@ class AddTaskBottomSheet extends StatelessWidget {
                   width: double.infinity,
                   height: 47.h,
                   child: ElevatedButton(
-                    onPressed: () async{
+                    onPressed: () async {
                       if (_formKey.currentState?.validate() ?? false) {
-                        TodoModel todoModel = TodoModel(title: homeController
-                            .titleController.value.text,
-                            description: homeController.descriptionController.value.text);
+                        TodoModel todoModel = TodoModel(
+                            title: homeController.titleController.value.text,
+                            description: homeController
+                                .descriptionController.value.text);
                         Get.back();
-                         AppServices.postData(todoModel);
+                        log(homeController.isEdit.value.toString());
 
+                       await AppServices.postData(todoModel);
+                       await AppServices.getData();
+homeController.titleController.value.clear();
+homeController.descriptionController.value.clear();
                       }
                     },
                     child: const Text('Save'),

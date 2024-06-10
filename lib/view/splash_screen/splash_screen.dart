@@ -1,25 +1,35 @@
+import 'package:demo_todo_megmo/controller/home_screen_controller.dart';
 import 'package:demo_todo_megmo/services/services.dart';
 import 'package:demo_todo_megmo/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../model/todo_model.dart';
+
 class SplashScreen extends StatefulWidget {
+  final homeController = Get.put(HomeScreenController());
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-
-
+  void initState()  {
     super.initState();
-    AppServices.getData();
-    Future.delayed(Duration(seconds: 2), () {
+     AppServices.getData();
+     homeController.refreshAllTodo();
+    print('alltodo');
+    print(homeController.allTodoList.toString());
+    homeController.isCompletedList.assignAll(
+        homeController.allTodoList.where((todo) => todo.isCompleted).toList());
+
+    Future.delayed(const Duration(seconds: 2), () {
       Get.offNamed(Routes.homeScreenRoute);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

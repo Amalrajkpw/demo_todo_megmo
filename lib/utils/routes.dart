@@ -18,7 +18,9 @@ class Routes {
     ),
     GetPage(
       name: todoDetailsRoute,
-      page: () =>  TodoDetailsPage(),
+      page: () =>  TodoDetailsPage(
+
+      ),
     ),
   ];
 }

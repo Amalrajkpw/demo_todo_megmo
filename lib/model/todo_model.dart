@@ -1,11 +1,11 @@
 class TodoModel {
   String title;
-
+  dynamic id;
   String description;
   bool isCompleted;
 
   TodoModel({
-    required this.title, required this.description, this.isCompleted = false,
+    required this.title, required this.description, this.isCompleted = false,this.id
   });
 }
 
