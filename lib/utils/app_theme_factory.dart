@@ -57,19 +57,20 @@ class AppTextTheme {
     headlineLarge: TextStyle(
         fontSize: 20.sp,
         fontWeight: FontWeight.w600,
-        color: Colors.white),
+        color: Colors.black),
     headlineMedium: TextStyle(
         fontSize: 27.sp,
         fontWeight: FontWeight.w600,
         color: AppColors.appBlack),
     headlineSmall: TextStyle(
-        fontSize: 22.sp, fontWeight: FontWeight.w600, color: Colors.black),
+        fontSize: 19.sp, fontWeight: FontWeight.w600, color: Colors.black),
     titleLarge: TextStyle(
-        fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+        fontSize: 16.sp, fontWeight: FontWeight.w300, color: Colors.black),
     titleMedium: TextStyle(
-        fontSize: 16.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.w500,
-        color: AppColors.subTextColor),
+        color: AppColors.subTextColor,
+    height: 0),
     displayMedium: TextStyle(
         fontSize: 14.sp,
         fontWeight: FontWeight.w700,

@@ -1,16 +1,38 @@
-# demo_todo_megmo
+ToDo Megmo
+ToDo Megmo is a simple Flutter application for managing your tasks. It allows you to create, edit, and delete tasks, as well as mark them as completed.
 
-A new Flutter project.
+Features
+Create new tasks with a title and description.
+Edit existing tasks.
+Mark tasks as completed.
+Delete tasks.
+Installation
+Clone the repository:
 
-## Getting Started
+bash
+Copy code
+git clone https://github.com/Amalrajkpw/todo-megmo.git
+Navigate to the project directory:
 
-This project is a starting point for a Flutter application.
+bash
+Copy code
+cd todo-megmo
+Install dependencies:
 
-A few resources to get you started if this is your first Flutter project:
+arduino
+Copy code
+flutter pub get
+Run the app:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+arduino
+Copy code
+flutter run
+Usage
+Launch the app on your device or emulator.
+Add new tasks by tapping the "+" button.
+Edit tasks by tapping on them.
+Mark tasks as completed by tapping the checkbox.
+Delete tasks by swiping them to the left or right.
+Dependencies
+GetX for state management and navigation
+http for making HTTP requests

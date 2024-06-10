@@ -21,9 +21,9 @@ class TodoAppMegmo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Todo',
+      title: 'Todo Megmo',
       theme: AppThemeFactory.lightTheme,
-      initialRoute: Routes.homeScreenRoute,
+      initialRoute: Routes.splashScreenRoute,
       getPages: Routes.pages,
     );
   }
